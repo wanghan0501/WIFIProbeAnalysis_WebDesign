@@ -1,11 +1,15 @@
 package com.cs.scu.service.impl;
 
 import com.cs.scu.entity.User;
+import com.cs.scu.mapper.UserMapper;
 import com.cs.scu.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginServiceImpl implements LoginService {
-    @Override
+    @Autowired
+    private UserMapper userMapper;
+
     public User doUserLogin(User user) throws Exception {
-        return null;
+        return userMapper.doUserLogin(user);
     }
 }
