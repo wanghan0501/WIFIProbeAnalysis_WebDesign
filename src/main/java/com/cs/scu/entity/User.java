@@ -6,6 +6,8 @@ package com.cs.scu.entity;
 public class User {
     private String userName;
     private String password;
+    private String identify;
+    private String nickName;
 
     public User() {
     }
@@ -29,5 +31,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIdentify() {
+        return identify;
+    }
+
+    public void setIdentify(String identify) {
+        this.identify = identify;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

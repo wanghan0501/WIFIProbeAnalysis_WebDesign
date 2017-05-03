@@ -41,5 +41,4 @@
             }
         });
     };
-
 })(jQuery, window, document);

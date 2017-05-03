@@ -6,10 +6,15 @@ import com.cs.scu.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginServiceImpl implements LoginService {
+
     @Autowired
     private UserMapper userMapper;
 
     public User doUserLogin(User user) throws Exception {
         return userMapper.doUserLogin(user);
+    }
+
+    public User doUserVerify(User user) throws Exception {
+        return userMapper.doUserVerify(user);
     }
 }

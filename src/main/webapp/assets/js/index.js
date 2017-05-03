@@ -25,14 +25,14 @@ function join_1(){
             data:{userName:$("#userName").val(),
                     password:$("#password").val()},
             success:function(data){
-                t=0;
                 alert(data);
             }
         });
-        document.querySelector('.cont_form_join').style.bottom = '-420px';
-        setTimeout(function(){
-	        document.querySelector('.cont_join').className = 'cont_join cont_join_form_act cont_join_finish';
-        },500);
+        // document.querySelector('.cont_form_join').style.bottom = '-420px';
+        // setTimeout(function(){
+	     //    document.querySelector('.cont_join').className = 'cont_join cont_join_form_act cont_join_finish';
+        // },500);
+
 
   }
 
@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
     $("#userName").blur(function () {
         var tip = $("#login_username_tip");
         $.ajax({
-            url:"/userIdentify",
+            url:"/verifyUser",
             type:"get",
             data:{userName:$("#userName").val()},
             success: function (data) {
