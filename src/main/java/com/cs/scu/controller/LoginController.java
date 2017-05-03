@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by maicius on 2017/3/31.
  */
@@ -18,14 +21,16 @@ public class LoginController {
     LoginService loginService;
 
     @RequestMapping(value = "/userLogin")
-    public ModelAndView Test(
+    public ModelAndView Test(HttpServletRequest request,
                              @RequestParam(value = "userName") String userName,
                              @RequestParam(value = "password") String password) throws Exception {
         User user = new User(userName, password);
         System.out.println(userName);
         ModelAndView mv = new ModelAndView();
         User loginUser = loginService.doUserLogin(user);
-        System.out.println("login_result:" + loginUser.toString());
+        HttpSession session = request.getSession();
+        session.setAttribute("user", loginUser);
+
         mv.setViewName("login");
         System.out.println("Controller finished");
         return mv;

@@ -7,7 +7,7 @@
         <result column="passowrd" property="password"/>
     </resultMap>
     <select id="doUserLogin" parameterType="User" resultMap="doUserLoginMap">
-        SELECT * FROM T_user
+        SELECT * FROM user
          WHERE  username = #{userName}
          AND password = #{password}
     </select>
