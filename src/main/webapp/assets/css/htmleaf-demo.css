@@ -1,8 +1,8 @@
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('../../fonts/glyphicons-halflings-regular.svg?rretjt');
-	src:url('../../fonts/glyphicons-halflings-regular.eot?#iefixrretjt') format('embedded-opentype');
+	src:url('../fonts/glyphicons-halflings-regular.svg?rretjt');
+	src:url('../fonts/glyphicons-halflings-regular.eot?#iefixrretjt') format('embedded-opentype');
 		/*url('../fonts/icomoon.?rretjt') format('woff'),*/
 		/*url('../fonts/icomoon.ttf?rretjt') format('truetype'),*/
 		/*url('../fonts/icomoon.svg?rretjt#icomoon') format('svg');*/

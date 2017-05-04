@@ -66,10 +66,10 @@ jQuery(document).ready(function () {
         });
     });
 
-    $("#identify").onclick(function(){
-        
+    $("#identify").click(function(){
+
         $.ajax({
-            url:"/identifyCode",
+            url:"/identifyCode.action",
             type:"get",
             data:{userName:$("#userNameReg").val()},
             success:function () {
@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
     $("#userName").blur(function () {
         var tip = $("#login_username_tip");
         $.ajax({
-            url:"/verifyUser",
+            url:"/verifyUser.action",
             type:"get",
             data:{userName:$("#userName").val()},
             success: function (data) {
@@ -120,6 +120,7 @@ jQuery(document).ready(function () {
                 }
                 else{
                     tip.addClass("login-welcome");
+                    tip.removeClass("reg-warning");
                     tip.text("欢迎您,"+data);
                 }
             }
