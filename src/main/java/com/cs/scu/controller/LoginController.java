@@ -16,7 +16,6 @@ public class LoginController {
 
     @Autowired
     LoginService loginService;
-
     @RequestMapping(value = "/userLogin")
     public ModelAndView Test(
                              @RequestParam(value = "userName") String userName,

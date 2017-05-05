@@ -7,5 +7,6 @@
 </head>
 <body>
 <h1>hello world</h1>
+<form action="/userLogin.action"></form>
 </body>
 </html>

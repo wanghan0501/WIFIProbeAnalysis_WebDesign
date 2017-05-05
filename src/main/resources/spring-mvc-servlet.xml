@@ -26,7 +26,16 @@
     比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
     实际开发时使用mvc:annotation-driven
      -->
-    <mvc:annotation-driven/>
+
+    <mvc:annotation-driven >
+        <!-- 消息转换器 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <mvc:resources location="/resources/" mapping="/resources/**" />
 
 
     <!-- 视图解析器
@@ -35,7 +44,7 @@
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 配置jsp路径的前缀 -->
-        <property name="prefix" value="/WEB-INF/pages"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
         <!-- 配置jsp路径的后缀 -->
         <property name="suffix" value=".jsp"/>
     </bean>
