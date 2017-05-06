@@ -18,6 +18,9 @@
 .reg-warning{
     color: #ff0515;
 }
+.no-warning{
+    color: rgba(0, 0, 0, 0);
+}
 .login_welcome{
     color:#5cb85c;
 }

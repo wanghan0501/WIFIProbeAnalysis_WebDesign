@@ -1,8 +1,8 @@
 /*
----------------------------
--Click on the Button Join !-
----------------------------
-*/
+ ---------------------------
+ -Click on the Button Join !-
+ ---------------------------
+ */
 
 
 var t = 0;
@@ -15,7 +15,7 @@ function join_1(){
         setTimeout(function(){
             document.querySelector('.cont_join').className = 'cont_join cont_join_form_act';
         },1000);
-    t++;
+        t++;
     }
     else{
         t++;
@@ -23,18 +23,15 @@ function join_1(){
             url:"/userLogin.action",
             type:"get",
             data:{userName:$("#userName").val(),
-                    password:$("#password").val()},
+                password:$("#password").val()},
             success:function(data){
+                t=0;
                 alert(data);
             }
         });
-        // document.querySelector('.cont_form_join').style.bottom = '-420px';
-        // setTimeout(function(){
-	     //    document.querySelector('.cont_join').className = 'cont_join cont_join_form_act cont_join_finish';
-        // },500);
 
 
-  }
+    }
 
 }
 
@@ -48,11 +45,13 @@ jQuery(document).ready(function () {
         var userNameReg = $('#userNameReg');
         var tip = $('#userName_tip');
         if(!(/^1[34578]\d{9}$/.test(userNameReg.val()))){
+            tip.removeClass("no-warning");
             tip.addClass("reg-warning");
             tip.text("错误的手机号");
         }else{
             tip.removeClass("reg-warning");
-            tip.text("");
+            tip.addClass("no-warning");
+            tip.text("test");
         }
         $.ajax({
             url:"/userRegister.action",
@@ -69,7 +68,7 @@ jQuery(document).ready(function () {
     $("#identify").click(function(){
 
         $.ajax({
-            url:"/identifyCode.action",
+            url:"/identifyCode",
             type:"get",
             data:{userName:$("#userNameReg").val()},
             success:function () {
@@ -82,10 +81,11 @@ jQuery(document).ready(function () {
         if($('#passwordReg').val().length < 6){
             tip.text("密码不能短于6位");
             tip.addClass("reg-warning");
-
+            tip.removeClass("no-warning");
         }else{
             tip.removeClass("reg-warning");
-            tip.text("");
+            tip.addClass("no-warning");
+            tip.text("nothing");
 
         }
     });
@@ -94,9 +94,11 @@ jQuery(document).ready(function () {
         var tip = $("#password_confirm_tip");
         if($("#password_confirm").val() === $("#passwordReg").val()){
             tip.removeClass("reg-warning");
-            tip.text("");
+            tip.addClass("no-warning");
+            tip.text("&nbsp;");
         }else{
             tip.addClass("reg-warning");
+            tip.removeClass("no-warning");
             tip.text("两次密码不一致");
         }
     });
@@ -110,17 +112,18 @@ jQuery(document).ready(function () {
     $("#userName").blur(function () {
         var tip = $("#login_username_tip");
         $.ajax({
-            url:"/verifyUser.action",
+            url:"/userIdentify",
             type:"get",
             data:{userName:$("#userName").val()},
             success: function (data) {
                 if(data === "failed"){
                     tip.addClass("reg-warning");
+                    tip.removeClass("no-warning");
                     tip.text("该用户不存在");
                 }
                 else{
                     tip.addClass("login-welcome");
-                    tip.removeClass("reg-warning");
+                    tip.addClass("no-warning");
                     tip.text("欢迎您,"+data);
                 }
             }
