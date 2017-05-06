@@ -18,7 +18,6 @@ public class LoginController {
 
     @Autowired
     LoginService loginService;
-
     @RequestMapping(value = "/userLogin")
     public String UserLogin(HttpServletRequest request,
                              @RequestParam(value = "userName") String userName,
