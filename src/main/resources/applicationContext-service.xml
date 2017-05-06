@@ -7,5 +7,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--新建一个service 需要到此处注册!-->
     <bean id="loginService" class="com.cs.scu.service.impl.LoginServiceImpl"/>
+    <bean id="dataUploadService" class="com.cs.scu.service.impl.DataUploadServiceImpl"/>
 </beans>
