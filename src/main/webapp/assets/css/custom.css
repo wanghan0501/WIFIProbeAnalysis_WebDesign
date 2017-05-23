@@ -122,7 +122,8 @@ border-color: #D3D3D3;
 }
 
 .navbar-default {
-border:0px solid #DDDDDD;
+    background-color: #2B333E;
+border:0px solid #2B333E;
      
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {

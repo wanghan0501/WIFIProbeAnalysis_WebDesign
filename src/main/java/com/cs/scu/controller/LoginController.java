@@ -36,18 +36,4 @@ public class LoginController {
             return "failed";
         }
     }
-
-    @RequestMapping("/verifyUser")
-    public String UserVerify( @RequestParam(value="userName") String userName) throws Exception {
-        User user = new User();
-        user.setUserName(userName);
-        User res = loginService.doUserVerify(user);
-        if(res !=null){
-            System.out.println("Verify:" +userName + res.getNickName());
-            return res.getNickName();
-        }else{
-            //该用户不存在
-            return "failed";
-        }
-    }
 }
