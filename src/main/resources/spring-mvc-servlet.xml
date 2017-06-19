@@ -49,6 +49,9 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <import resource="kafka-beans.xml"></import>
+    <import resource="kafkaProducer.xml"></import>
+    <import resource="kafkaConsumer.xml"></import>
     <!--&lt;!&ndash; 拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->
     <!--<mvc:interceptor>-->

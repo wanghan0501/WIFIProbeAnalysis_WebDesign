@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 定义producer的参数 -->
     <bean id="producerProperties" class="java.util.HashMap">
@@ -34,8 +37,9 @@
     <bean id="KafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
         <constructor-arg ref="producerFactory" />
         <constructor-arg name="autoFlush" value="true" />
-        <property name="defaultTopic" value="defaultTopic" />
+        <property name="defaultTopic" value="test" />
         <property name="producerListener" ref="producerListener"/>
     </bean>
-    <bean id="producerListener" class="com.git.kafka.producer.KafkaProducerListener" />
+
+    <bean id="producerListener" class="com.cs.scu.kafka.producer.KafkaProducerListener" />
 </beans>

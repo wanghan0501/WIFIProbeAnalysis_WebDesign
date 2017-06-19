@@ -36,7 +36,7 @@
     </bean>
 
     <!-- 实际执行消息消费的类 -->
-    <bean id="messageListernerConsumerService" class="com.git.kafka.consumer.KafkaConsumerServer"/>
+    <bean id="messageListernerConsumerService" class="com.cs.scu.kafka.consumer.KafkaConsumerServer"/>
 
     <!-- 消费者容器配置信息 -->
     <bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">

@@ -89,6 +89,11 @@
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.4</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.aopalliance/com.springsource.org.aopalliance -->
         <dependency>
             <groupId>org.aopalliance</groupId>

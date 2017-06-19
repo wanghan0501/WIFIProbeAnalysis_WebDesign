@@ -1,16 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
-  User: maicius
-  Date: 2017/3/31
-  Time: 下午9:36
+  User: lch
+  Date: 2017/6/19
+  Time: 15:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login Success</title>
+    <title>Title</title>
 </head>
 <body>
-<p id="success">欢迎您，${sessionScope.user.nickName}</p>
+<h1>kafka_receive:${msg}</h1>
+
 </body>
 </html>

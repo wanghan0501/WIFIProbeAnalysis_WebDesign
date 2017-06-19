@@ -7,6 +7,9 @@
 </head>
 <body>
 <h1>hello world</h1>
-<form action="/userLogin.action"></form>
+<h1>Welcome</h1>
+<h2><a href="/upload.action">Send a Message</a></h2>
+<h2><a href="/receive.action">Get a Message</a></h2>
+
 </body>
 </html>
