@@ -29,6 +29,6 @@ public class Util {
     @Scheduled(cron = "*/30 * * * * * ")
     public void hiveTask(){
         System.err.println("😁😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😄😁😁😁😁定期任务！");
-        consumerForHive.receive();
+        //consumerForHive.receive();
     }
 }

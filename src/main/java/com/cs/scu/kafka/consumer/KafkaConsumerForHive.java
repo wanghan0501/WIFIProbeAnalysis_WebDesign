@@ -3,15 +3,20 @@ package com.cs.scu.kafka.consumer;
 import com.cs.scu.hive.HiveService;
 import com.cs.scu.tools.Util;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import scala.util.parsing.combinator.testing.Str;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,37 +51,35 @@ public class KafkaConsumerForHive {
     public String receive() {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
         consumer.subscribe(Arrays.asList(properties.getProperty("topic")));
-        final int minBatchSize = 20;
+        final int minBatchSize = 200;
         List<ConsumerRecord<String, String>> buffer = new ArrayList<ConsumerRecord<String, String>>();
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(100);
 
             for (ConsumerRecord<String, String> record : records) {
                 buffer.add(record);
-               System.err.println(buffer.size() + "----->" + record);
+                System.err.println(buffer.size() + "----->" + record);
 
             }
             if (buffer.size() >= minBatchSize) {
-                boolean b = writeFile(buffer);//先把buffer写入文件中
-                //if(b)
-                   // insertIntoHive(buffer);//存入hive中
-                    consumer.commitSync();
-                    buffer.clear();
+                writeFileToHadoop(buffer);//先把buffer写入文件中
+                consumer.commitSync();
+                buffer.clear();
             }
         }
     }
 
-    private void insertIntoHive(List<ConsumerRecord<String, String>> buffer) {
+    private void insertIntoHive() {
         String tableName = "test";
         try {
             con = HiveService.getConn();
             stmt = HiveService.getStmt(con);
 
-            for (int i = 0; i < buffer.size(); i++) {
+            /*for (int i = 0; i < buffer.size(); i++) {
                 String data = "\"" + StringEscapeUtils.escapeJava(buffer.get(i).value()) + "\"";
                 stmt.execute("insert into test(id, data) values(" + buffer.get(i).offset()+ "," + data + ")");
-            }
-            //stmt.execute("load data inpath '/Users/lch/Desktop/file.txt' into table test");
+            }*/
+            stmt.execute("load data inpath '/user/hive/output/data.dat' into table test");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,32 +87,34 @@ public class KafkaConsumerForHive {
     }
 
 
+    public synchronized void writeFileToHadoop(List<ConsumerRecord<String, String>> buffer) {
 
-    public synchronized boolean writeFile(List<ConsumerRecord<String, String>> buffer) {
 
-        long begin = System.currentTimeMillis();
+        Configuration configuration = new Configuration();
+        String str;
+        StringBuffer stringBuffer = new StringBuffer();
         try {
-            File file = new File("/usr/local/file.txt");
 
-            fileWriter = new FileWriter(file,false);
-            printWriter = new PrintWriter(fileWriter);
+            FileSystem fileSystem = FileSystem.get(configuration);
+            Path path = new Path("/user/hive/output/data.dat");
+            FSDataOutputStream fsDataOutputStream = fileSystem.create(path);
+
+            //fileWriter = new FileWriter(file,false);
+            //printWriter = new PrintWriter(fileWriter);
             for (int i = 0; i < buffer.size(); i++) {
-                printWriter.println(buffer.get(i).value()   + "\t" + buffer.get(i).value());
+                str = buffer.get(i).value() + "\t" + buffer.get(i).value() + "\n";
+                stringBuffer.append(str);
+                //printWriter.println(buffer.get(i).value()   + "\t" + buffer.get(i).value());
             }
-
-            printWriter.flush();
+            fsDataOutputStream.write(stringBuffer.toString().getBytes(),0,stringBuffer.toString().getBytes().length);
+            fsDataOutputStream.flush();
+            fsDataOutputStream.close();
+            stringBuffer.delete(0,stringBuffer.length());
+            insertIntoHive();//存入hive中
+            //printWriter.flush();
 
         } catch (IOException e) {
-            return false;
-        }finally {
-            try {
-                fileWriter.close();
-                long end = System.currentTimeMillis();
-                System.err.println("写文件一共花了 -------》》》》》》" + (end - begin) + "毫秒");
-                return true;
-            } catch (IOException e) {
-                return false;
-            }
+
         }
 
     }

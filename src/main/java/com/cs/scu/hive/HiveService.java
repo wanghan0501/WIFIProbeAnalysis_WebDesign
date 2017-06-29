@@ -14,8 +14,8 @@ public class HiveService {
     public static String url = "jdbc:hive2://localhost:10000/default";
 
     //系统登录用的密码和账号
-    public static String user = "lch";
-    public static String pass = "lch19960205lch.";
+    public static String user = "root";
+    public static String pass = "Icandobigdata!";
     /**
      * 创建连接
      * @return
