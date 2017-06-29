@@ -6,9 +6,7 @@
     <title>Spring4 MVC -HelloWorld</title>
 </head>
 <body>
-<h1>hello world</h1>
 <h1>Welcome</h1>
-<h2><a href="/upload.action">Send a Message</a></h2>
 <h2><a href="/receive.action">Get a Message</a></h2>
 
 </body>

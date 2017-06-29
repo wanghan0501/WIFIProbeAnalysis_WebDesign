@@ -6,7 +6,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.stereotype.Component;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -16,6 +18,7 @@ import java.util.Properties;
 public class KafkaConsumers {
 
     private Properties properties;
+
 
     public KafkaConsumers(Properties properties) {
         super();
@@ -30,18 +33,21 @@ public class KafkaConsumers {
         this.properties = properties;
     }
 
-    public String receive() {
+    public List<String> receive() {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
         consumer.subscribe(Arrays.asList(properties.getProperty("topic")));
+        List<String> buffer = new ArrayList<String>();
         String msg = "";
         while (true) {
+            System.err.println("consumer receive------------------");
             ConsumerRecords<String, String> records = consumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {
-                msg = record.value();
-                consumer.close();
-                return msg;
-
+                buffer.add(record.value());
             }
+            consumer.close();
+            return buffer;
         }
+
+
     }
 }

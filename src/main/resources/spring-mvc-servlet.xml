@@ -2,20 +2,26 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.2.xsd  ">
 
     <!-- 可以扫描controller、service、...
     这里让扫描controller，指定controller的包
      -->
     <context:component-scan base-package="com.cs.scu.controller"/>
+    <context:component-scan base-package="com.cs.scu.tools"/>
 
-
+    <!--配置计划任务!-->
+    <task:annotation-driven scheduler="taskScheduler" mode="proxy"/>
+    <task:scheduler id="taskScheduler" pool-size="10"/>
     <!--注解映射器 -->
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
     <!--注解适配器 -->
@@ -35,6 +41,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
     <mvc:resources location="/resources/" mapping="/resources/**" />
 
 
@@ -50,8 +57,6 @@
     </bean>
 
     <import resource="kafka-beans.xml"></import>
-    <import resource="kafkaProducer.xml"></import>
-    <import resource="kafkaConsumer.xml"></import>
     <!--&lt;!&ndash; 拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->
     <!--<mvc:interceptor>-->

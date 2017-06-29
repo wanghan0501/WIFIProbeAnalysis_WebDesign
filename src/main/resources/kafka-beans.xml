@@ -11,11 +11,12 @@
     <context:component-scan base-package="com.cs.scu.kafka.consumer"></context:component-scan>
 
 
+    <!--这是给 数据分析 用的!-->
     <bean id="kafkaProducers" class="com.cs.scu.kafka.producer.KafkaProducers">
         <constructor-arg>
             <props>
-                <prop key="topic">test</prop>
-                <prop key="bootstrap.servers">127.0.0.1:9092</prop>
+                <prop key="topic">my-test</prop>
+                <prop key="bootstrap.servers">10.116.155.136:9092,10.116.22.16:9092,10.116.33.158:9092</prop>
                 <prop key="acks">all</prop>
                 <prop key="key.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
                 <prop key="value.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
@@ -27,8 +28,39 @@
     <bean id="kafkaConsumers" class="com.cs.scu.kafka.consumer.KafkaConsumers">
         <constructor-arg>
             <props>
-                <prop key="topic">test</prop>
-                <prop key="bootstrap.servers">127.0.0.1:9092</prop>
+                <prop key="topic">my-test</prop>
+                <prop key="bootstrap.servers">10.116.155.136:9092,10.116.22.16:9092,10.116.33.158:9092</prop>
+                <prop key="group.id">group1</prop>
+                <prop key="enable.auto.commit">true</prop>
+                <prop key="auto.commit.interval.ms">1000</prop>
+                <prop key="session.timeout.ms">30000</prop>
+                <prop key="key.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+                <prop key="value.deserializer">org.apache.kafka.common.serialization.StringDeserializer
+                </prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <!--这是hive用的!-->
+    <bean id="kafkaProducerForHive" class="com.cs.scu.kafka.producer.KafkaProducerForHive">
+        <constructor-arg>
+            <props>
+                <prop key="topic">hive-data</prop>
+                <prop key="bootstrap.servers">10.116.155.136:9092,10.116.22.16:9092,10.116.33.158:9092</prop>
+                <prop key="acks">all</prop>
+                <prop key="key.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="value.serializer">org.apache.kafka.common.serialization.StringSerializer</prop>
+                <prop key="buffer.memory">33554432</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <bean id="kafkaConsumerForHive" class="com.cs.scu.kafka.consumer.KafkaConsumerForHive">
+        <constructor-arg>
+            <props>
+                <prop key="topic">hive-data</prop>
+                <prop key="bootstrap.servers">10.116.155.136:9092,10.116.22.16:9092,10.116.33.158:9092</prop>
                 <prop key="group.id">group1</prop>
                 <prop key="enable.auto.commit">true</prop>
                 <prop key="auto.commit.interval.ms">1000</prop>
