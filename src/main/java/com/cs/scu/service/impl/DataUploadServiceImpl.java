@@ -32,17 +32,21 @@ public class DataUploadServiceImpl implements DataUploadService {
         String time_id = new SimpleDateFormat("yyyyMMDDHHmmssSSS").format(date) + "-" + dataGroup.getId();
         System.out.println(time_id);
         groupData.setTime_id(time_id);
-        groupData.setTime(dataGroup.getTime());
+        groupData.setRecord_time(dataGroup.getTime());
         groupData.setAddr(dataGroup.getAddr());
-        groupData.setData(dataGroup.getData().toString());
-        groupData.setId(dataGroup.getId());
+        groupData.setDataList(dataGroup.getData().toString());
+        groupData.setProbe_id(dataGroup.getId());
         groupData.setLat(dataGroup.getLat());
         groupData.setLon(dataGroup.getLon());
         groupData.setMmac(dataGroup.getMmac());
         groupData.setWmac(dataGroup.getWmac());
         groupData.setWssid(dataGroup.getWssid());
         groupData.setRate(dataGroup.getRate());
-        groupDataDao.save(groupData);
+        try {
+            groupDataDao.save(groupData);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         System.out.println("Insert Into Hbase Success");
     }
 

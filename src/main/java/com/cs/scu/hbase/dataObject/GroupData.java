@@ -5,43 +5,37 @@ import com.cs.scu.hbase.HbaseTable;
 
 @HbaseTable(name = "GroupData", rowKey = "time_id")
 public class GroupData implements java.io.Serializable{
-    private String time_id;
-    @HbaseColumn(family = "probeInfo", qualifier = "id")
-    private String id;
+    public String time_id;
+
+    @HbaseColumn(family = "probeInfo", qualifier = "probe_id")
+    public String probe_id;
 
     @HbaseColumn(family = "probeInfo", qualifier = "mmac")
-    private String mmac;
+    public String mmac;
 
     @HbaseColumn(family = "probeInfo", qualifier = "rate")
-    private String rate;
+    public String rate;
 
     @HbaseColumn(family = "probeInfo", qualifier = "wssid")
-    private String wssid;
+    public String wssid;
     @HbaseColumn(family = "probeInfo", qualifier = "wmac")
-    private String wmac;
-    @HbaseColumn(family = "probeInfo", qualifier = "time")
-    private String time;
+    public String wmac;
+    @HbaseColumn(family = "probeInfo", qualifier = "record_time")
+    public String record_time;
 
     //下面三个字段如果没有需要补全
     @HbaseColumn(family = "Address", qualifier = "lat")
-    private String lat;
+    public String lat;
     @HbaseColumn(family = "Address", qualifier = "lon")
-    private String lon;
+    public String lon;
     @HbaseColumn(family = "Address", qualifier = "addr")
-    private String addr;
+    public String addr;
 
-    @HbaseColumn(family = "data", qualifier = "data")
-    private String data;
+    @HbaseColumn(family = "data", qualifier = "dataList")
+    public String dataList;
 
     public GroupData(){
 
-    }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getMmac() {
@@ -76,14 +70,6 @@ public class GroupData implements java.io.Serializable{
         this.wmac = wmac;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public String getLat() {
         return lat;
     }
@@ -108,19 +94,35 @@ public class GroupData implements java.io.Serializable{
         this.addr = addr;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public String getTime_id() {
         return time_id;
     }
 
     public void setTime_id(String time_id) {
         this.time_id = time_id;
+    }
+
+    public String getProbe_id() {
+        return probe_id;
+    }
+
+    public void setProbe_id(String probe_id) {
+        this.probe_id = probe_id;
+    }
+
+    public String getRecord_time() {
+        return record_time;
+    }
+
+    public void setRecord_time(String record_time) {
+        this.record_time = record_time;
+    }
+
+    public String getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(String dataList) {
+        this.dataList = dataList;
     }
 }
