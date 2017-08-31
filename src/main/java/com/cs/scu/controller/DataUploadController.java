@@ -1,7 +1,6 @@
 package com.cs.scu.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.cs.scu.entity.Data;
 import com.cs.scu.entity.DataGroup;
 import com.cs.scu.kafka.consumer.KafkaConsumerForHive;
@@ -9,8 +8,6 @@ import com.cs.scu.kafka.consumer.KafkaConsumers;
 import com.cs.scu.kafka.producer.KafkaProducerForHive;
 import com.cs.scu.kafka.producer.KafkaProducers;
 import com.cs.scu.service.DataUploadService;
-import com.cs.scu.tools.Util;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Created by lch on 2017/5/3.
@@ -96,6 +92,7 @@ public class DataUploadController {
                     }
 
                 }
+
                 String resJson = JSON.toJSONString(group);
 
                 //System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));

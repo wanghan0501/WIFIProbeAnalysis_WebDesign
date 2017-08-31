@@ -5,4 +5,5 @@ package com.cs.scu.service;
  */
 public interface DataUploadService {
     String PrintJson() throws Exception;
+
 }
