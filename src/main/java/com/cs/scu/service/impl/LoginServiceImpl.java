@@ -4,7 +4,9 @@ import com.cs.scu.entity.User;
 import com.cs.scu.mapper.UserMapper;
 import com.cs.scu.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired

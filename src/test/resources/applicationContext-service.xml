@@ -10,10 +10,10 @@
        default-lazy-init="true" default-autowire="byName">
 
     <!--新建一个service 需要到此处注册!-->
-    <bean id="loginService" class="com.cs.scu.service.impl.LoginServiceImpl"/>
-    <bean id="dataUploadService" class="com.cs.scu.service.impl.DataUploadServiceImpl"/>
+    <!--<bean id="loginService" class="com.cs.scu.service.impl.LoginServiceImpl"/>-->
+    <!--<bean id="dataUploadService" class="com.cs.scu.service.impl.DataUploadServiceImpl"/>-->
     <context:component-scan base-package="com.cs.scu.hbase"/>
-
+    <context:component-scan base-package="com.cs.scu.service"/>
     <!--注解映射器 -->
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
     <!--注解适配器 -->

@@ -90,9 +90,8 @@ public class DataUploadController {
                     if (data1.getTmc() == null) {
                         data1.setTmc("");
                     }
-
                 }
-
+                dataUploadService.saveObject(group);
                 String resJson = JSON.toJSONString(group);
 
                 //System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));
@@ -101,7 +100,6 @@ public class DataUploadController {
                 producerForHive.sendMessage(resJson);//发送数据到topic : hiveData,存放到hive中
 
             }catch (Exception e){
-
             }
 
         } catch (UnsupportedEncodingException e) {
