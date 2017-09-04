@@ -101,7 +101,7 @@ public class DataUploadController {
                 //System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));
 
                 producers.sendMessage(resJson);//发送数据到kafka topic : test,进行数据分析
-                producerForHive.sendMessage(resJson);//发送数据到topic : hiveData,存放到hive中
+                //producerForHive.sendMessage(resJson);//发送数据到topic : hiveData,存放到hive中
 
             }catch (Exception e){
 
