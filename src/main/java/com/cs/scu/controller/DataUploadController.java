@@ -1,7 +1,6 @@
 package com.cs.scu.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.cs.scu.entity.Data;
 import com.cs.scu.entity.DataGroup;
 import com.cs.scu.kafka.consumer.KafkaConsumerForHive;
@@ -9,11 +8,13 @@ import com.cs.scu.kafka.consumer.KafkaConsumers;
 import com.cs.scu.kafka.producer.KafkaProducerForHive;
 import com.cs.scu.kafka.producer.KafkaProducers;
 import com.cs.scu.service.DataUploadService;
-import com.cs.scu.tools.Util;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -23,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Created by lch on 2017/5/3.
@@ -94,17 +94,16 @@ public class DataUploadController {
                     if (data1.getTmc() == null) {
                         data1.setTmc("");
                     }
-
                 }
+                dataUploadService.saveObject(group);
                 String resJson = JSON.toJSONString(group);
 
-                //System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));
+                System.err.println("resJson ---> " + StringEscapeUtils.escapeJava(resJson));
 
                 producers.sendMessage(resJson);//发送数据到kafka topic : test,进行数据分析
                 //producerForHive.sendMessage(resJson);//发送数据到topic : hiveData,存放到hive中
 
             }catch (Exception e){
-
             }
 
         } catch (UnsupportedEncodingException e) {

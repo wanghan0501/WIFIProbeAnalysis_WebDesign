@@ -1,15 +1,10 @@
-package com.cs.scu.tools;
+package com.cs.scu.util;
 
 import com.cs.scu.kafka.consumer.KafkaConsumerForHive;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Created by lch on 2017/6/24.
