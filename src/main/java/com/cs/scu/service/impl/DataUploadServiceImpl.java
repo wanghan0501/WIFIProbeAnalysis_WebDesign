@@ -1,5 +1,8 @@
 package com.cs.scu.service.impl;
 
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.cs.scu.entity.DataGroup;
 import com.cs.scu.hbase.dao.GroupDataDao;
 import com.cs.scu.hbase.dataObject.GroupData;
@@ -34,7 +37,8 @@ public class DataUploadServiceImpl implements DataUploadService {
         groupData.setTime_id(time_id);
         groupData.setRecord_time(dataGroup.getTime());
         groupData.setAddr(dataGroup.getAddr());
-        groupData.setDataList(dataGroup.getData().toString());
+        JSONArray ja = JSONArray.parseArray(JSON.toJSONString(dataGroup.getData()));
+        groupData.setDataList(ja.toJSONString());
         groupData.setProbe_id(dataGroup.getId());
         groupData.setLat(dataGroup.getLat());
         groupData.setLon(dataGroup.getLon());
