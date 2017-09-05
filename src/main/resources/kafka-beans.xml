@@ -15,7 +15,7 @@
     <bean id="kafkaProducers" class="com.cs.scu.kafka.producer.KafkaProducers">
         <constructor-arg>
             <props>
-                <prop key="topic">test-romote</prop>
+                <prop key="topic">test-remote</prop>
                 <!--<prop key="topic">test</prop>-->
                 <!--<prop key="bootstrap.servers">localhost:9092</prop>-->
                 <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
@@ -30,7 +30,7 @@
     <bean id="kafkaConsumers" class="com.cs.scu.kafka.consumer.KafkaConsumers">
         <constructor-arg>
             <props>
-                <prop key="topic">test-romote</prop>
+                <prop key="topic">test-remote</prop>
                 <!--<prop key="topic">test</prop>-->
                 <!--<prop key="bootstrap.servers">localhost:9092</prop>-->
                 <prop key="bootstrap.servers">120.24.238.195:9092,120.25.162.32:9092,112.74.114.226:9092,112.74.124.150:9092</prop>
